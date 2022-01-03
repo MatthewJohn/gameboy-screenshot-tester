@@ -36,7 +36,7 @@ then
 fi
 
 # Start display
-Xvfb :99 -screen 0 1024x768x16 +extension GLX +render -noreset &
+Xvfb :99 -screen 0 600x400x16 +extension GLX +render -noreset &
 xvfb_pid=$!
 
 # Wait for screen to start
@@ -50,4 +50,3 @@ scrot --delay=$DELAY $MOUNT_DIR/$OUTPUT_SCREENSHOT &
 # Start BGB with timeout
 timeout --signal=TERM ${BGB_TIMEOUT}s wine64 /tools/bgb.exe bgb -rom $MOUNT_DIR/$ROM_FILE -demoplay $MOUNT_DIR/$REPLAY_FILE -setting 'WaveOut=0'
 
-wait
