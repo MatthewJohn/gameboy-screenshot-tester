@@ -22,7 +22,7 @@ fi
 
 if [ "$BGB_TIMEOUT" == "" ]
 then
-    BGB_TIMEOUT=45s
+    BGB_TIMEOUT=45
 fi
 
 if [ "$ROM_FILE" == "" ]
@@ -48,6 +48,6 @@ export DISPLAY=:99
 scrot --delay=$DELAY $MOUNT_DIR/$OUTPUT_SCREENSHOT &
 
 # Start BGB with timeout
-timeout --signal=TERM $BGB_TIMEOUT wine64 /tools/bgb.exe bgb -rom $MOUNT_DIR/$ROM_FILE -demoplay $MOUNT_DIR/$REPLAY_FILE -setting 'WaveOut=0'
+timeout --signal=TERM ${BGB_TIMEOUT}s wine64 /tools/bgb.exe bgb -rom $MOUNT_DIR/$ROM_FILE -demoplay $MOUNT_DIR/$REPLAY_FILE -setting 'WaveOut=0'
 
 wait
