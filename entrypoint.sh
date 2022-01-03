@@ -48,6 +48,6 @@ export DISPLAY=:99
 scrot --delay=$DELAY $MOUNT_DIR/$OUTPUT_SCREENSHOT &
 
 # Start BGB with timeout
-timeout --signal=TERM $BGB_TIMEOUT wine64 /tools/bgb.exe bgb -rom $MOUNT_DIR/$ROM_FILE -demoplay $MOUNT_DIR/$REPLAY_FILE
+timeout --signal=TERM $BGB_TIMEOUT wine64 /tools/bgb.exe bgb -rom $MOUNT_DIR/$ROM_FILE -demoplay $MOUNT_DIR/$REPLAY_FILE -setting 'WaveOut=0'
 
 wait
