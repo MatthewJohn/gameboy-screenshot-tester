@@ -9,10 +9,7 @@ RUN apt-get update && apt-get install --assume-yes scrot wine64 xvfb
 RUN dpkg --add-architecture i386 && apt-get update && apt-get install --assume-yes wine32
 
 # Install node
-RUN apt-get install --assume-yes curl
-RUN curl -sL https://deb.nodesource.com/setup_12.x | bash
-RUN apt-get install nodejs --assume-yes
-RUN npm install --global blink-diff
+RUN apt-get install --assume-yes curl imagemagick
 
 COPY tools/bgb.exe /tools/
 COPY entrypoint.sh /tools/

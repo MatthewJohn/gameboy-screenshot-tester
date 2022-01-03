@@ -66,5 +66,5 @@ timeout --signal=TERM ${BGB_TIMEOUT}s wine64 /tools/bgb.exe bgb -runfast -rom $M
 set -e
 
 # Compare images
-blink-diff --threshold-type percent --threshold $THRESHOLD --output $MOUNT_DIR/$COMPARISON_IMAGE $MOUNT_DIR/$SOURCE_IMAGE $MOUNT_DIR/$OUTPUT_IMAGE
+compare $MOUNT_DIR/$SOURCE_IMAGE $MOUNT_DIR/$OUTPUT_IMAGE -compose Src $MOUNT_DIR/$COMPARISON_IMAGE
 
