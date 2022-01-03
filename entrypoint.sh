@@ -7,7 +7,7 @@ fi
 
 if [ "$DELAY" == "" ]
 then
-    DELAY=30
+    DELAY=60
 fi
 
 if [ "$INPUT_FILE" == "" ]
@@ -22,7 +22,7 @@ fi
 
 if [ "$BGB_TIMEOUT" == "" ]
 then
-    BGB_TIMEOUT=45
+    BGB_TIMEOUT=80
 fi
 
 if [ "$ROM_FILE" == "" ]
