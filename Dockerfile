@@ -2,9 +2,17 @@ FROM ubuntu:latest
 
 env DEBIAN_FRONTEND=noninteractive
 
+# Install scrot for screenshots, wine for running bgb, xvfb for fake display
 RUN apt-get update && apt-get install --assume-yes scrot wine64 xvfb
 
+# Install 32-bit wine
 RUN dpkg --add-architecture i386 && apt-get update && apt-get install --assume-yes wine32
+
+# Install node
+RUN apt-get install --assume-yes curl
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash
+RUN apt-get install nodejs --assume-yes
+RUN npm install --global blink-diff
 
 COPY tools/bgb.exe /tools/
 COPY entrypoint.sh /tools/

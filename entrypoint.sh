@@ -1,5 +1,8 @@
 #!/bin/bash
 
+set -x
+set -e
+
 if [ "$MOUNT_DIR" == "" ]
 then
     MOUNT_DIR=/work
@@ -7,12 +10,12 @@ fi
 
 if [ "$DELAY" == "" ]
 then
-    DELAY=60
+    DELAY=15
 fi
 
-if [ "$INPUT_FILE" == "" ]
+if [ "$SOURCE_IMAGE" == "" ]
 then
-    INPUT_FILE=comparison.jpg
+    SOURCE_IMAGE=source.jpg
 fi
 
 if [ "$REPLAY_FILE" == "" ]
@@ -22,7 +25,7 @@ fi
 
 if [ "$BGB_TIMEOUT" == "" ]
 then
-    BGB_TIMEOUT=80
+    BGB_TIMEOUT=20
 fi
 
 if [ "$ROM_FILE" == "" ]
@@ -30,9 +33,19 @@ then
     ROM_FILE="gb.rom"
 fi
 
-if [ "$OUTPUT_SCREENSHOT" == "" ]
+if [ "$OUTPUT_IMAGE" == "" ]
 then
-    OUTPUT_SCREENSHOT=output.jpg
+    OUTPUT_IMAGE=output.jpg
+fi
+
+if [ "$COMPARISON_IMAGE" == "" ]
+then
+    COMPARISON_IMAGE=comparison.jpg
+fi
+
+if [ "$THRESHOLD" == "" ]
+then
+    THRESHOLD=95
 fi
 
 # Start display
@@ -45,8 +58,13 @@ sleep 10
 export DISPLAY=:99
 
 # Start scot to take screenhot
-scrot --delay=$DELAY $MOUNT_DIR/$OUTPUT_SCREENSHOT &
+scrot --delay=$DELAY $MOUNT_DIR/$OUTPUT_IMAGE &
 
+set +e
 # Start BGB with timeout
-timeout --signal=TERM ${BGB_TIMEOUT}s wine64 /tools/bgb.exe bgb -rom $MOUNT_DIR/$ROM_FILE -demoplay $MOUNT_DIR/$REPLAY_FILE -setting 'WaveOut=0'
+timeout --signal=TERM ${BGB_TIMEOUT}s wine64 /tools/bgb.exe bgb -runfast -rom $MOUNT_DIR/$ROM_FILE -demoplay $MOUNT_DIR/$REPLAY_FILE -setting 'WaveOut=0'
+set -e
+
+# Compare images
+blink-diff --threshold-type percent --threshold $THRESHOLD --output $MOUNT_DIR/$COMPARISON_IMAGE $MOUNT_DIR/$SOURCE_IMAGE $MOUNT_DIR/$OUTPUT_IMAGE
 
