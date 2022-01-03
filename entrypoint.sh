@@ -45,9 +45,9 @@ sleep 10
 export DISPLAY=:99
 
 # Start scot to take screenhot
-scrot --delay=$DELAY --focused $MOUNT_DIR/$OUTPUT_SCREENSHOT &
+scrot --delay=$DELAY $MOUNT_DIR/$OUTPUT_SCREENSHOT &
 
 # Start BGB with timeout
-timeout $BGB_TIMEOUT wine64 /tools/bgb.exe bgb -rom $MOUNT_DIR/$ROM_FILE -demoplay $MOUNT_DIR/$REPLAY_FILE
+timeout --signal=TERM $BGB_TIMEOUT wine64 /tools/bgb.exe bgb -rom $MOUNT_DIR/$ROM_FILE -demoplay $MOUNT_DIR/$REPLAY_FILE
 
 wait
