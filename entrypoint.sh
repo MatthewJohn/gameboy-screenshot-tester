@@ -72,5 +72,6 @@ comparison_failed=$?
 if [ "$comparison_failed" != "0" ]
 then
     echo Image comparison failed!
+    exit 1
 fi
 
