@@ -63,8 +63,14 @@ scrot --delay=$DELAY $MOUNT_DIR/$OUTPUT_IMAGE &
 set +e
 # Start BGB with timeout
 timeout --signal=TERM ${BGB_TIMEOUT}s wine64 /tools/bgb.exe bgb -runfast -rom $MOUNT_DIR/$ROM_FILE -demoplay $MOUNT_DIR/$REPLAY_FILE -setting 'WaveOut=0'
-set -e
 
 # Compare images
-compare $MOUNT_DIR/$SOURCE_IMAGE $MOUNT_DIR/$OUTPUT_IMAGE -compose Src $MOUNT_DIR/$COMPARISON_IMAGE
+compare -verbose -metric mae $MOUNT_DIR/$SOURCE_IMAGE $MOUNT_DIR/$OUTPUT_IMAGE -compose Src $MOUNT_DIR/$COMPARISON_IMAGE
+
+comparison_failed=$?
+
+if [ "$comparison_failed" != "0" ]
+then
+    echo Image comparison failed!
+fi
 
