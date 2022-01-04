@@ -31,15 +31,16 @@ docker run -v `pwd`:/work gameboy-automated-screenshot-tester
 
 The following are configs that can be provided as environment arguments to `docker run` using `-e KEY=VALUE`
 
-|| Key  || Description || Default ||
-|| `INPUT_DIR` || Directory within the container that the `SOURCE_IMAGE` is expected to be found || `/work` ||
-|| `OUTPUT_DIR` || Directory within the container that the `OUTPUT_IMAGE` and `COMPARISON_IMAGE` will be saved || `/work` ||
-|| `ROM_DIR` || Directory within the container that the `ROM_FILE` is expected to be found || `/work` ||
-|| `DELAY` || Time in seconds to allow for BGB to start and to run replay, before capturing screenshot || `15` ||
-|| `SOURCE_IMAGE` || Filename of image to compare screenshot to || `source.jpg` ||
-|| `REPLAY_FILE` || Name of the replay file, that is provided to BGB || `replay.dem` ||
-|| `BGB_TIMEOUT` || Time to run BGB for. This includes startup, running of replay and capturing image || `20` ||
-|| `ROM_FILE` || Name of ROM file to run || `gb.rom` ||
-|| `OUTPUT_IMAGE` || Filename of output screenshot || `output.jpg` ||
-|| `COMPARISON_IMAGE` || Filename of comparison image that is generated || `comparison.jpg` ||
+| Key  | Description | Default |
+--- | --- | --- |
+| `INPUT_DIR` | Directory within the container that the `SOURCE_IMAGE` is expected to be found | `/work` |
+| `OUTPUT_DIR` | Directory within the container that the `OUTPUT_IMAGE` and `COMPARISON_IMAGE` will be saved | `/work` |
+| `ROM_DIR` | Directory within the container that the `ROM_FILE` is expected to be found | `/work` |
+| `DELAY` | Time in seconds to allow for BGB to start and to run replay, before capturing screenshot | `15` |
+| `SOURCE_IMAGE` | Filename of image to compare screenshot to | `source.jpg` |
+| `REPLAY_FILE` | Name of the replay file, that is provided to BGB | `replay.dem` |
+| `BGB_TIMEOUT` | Time to run BGB for. This includes startup, running of replay and capturing image | `20` |
+| `ROM_FILE` | Name of ROM file to run | `gb.rom` |
+| `OUTPUT_IMAGE` | Filename of output screenshot | `output.jpg` |
+| `COMPARISON_IMAGE` | Filename of comparison image that is generated | `comparison.jpg` |
 
