@@ -58,6 +58,9 @@ then
     THRESHOLD=95
 fi
 
+# Remove output file if it exists
+rm -f $OUTPUT_DIR/$OUTPUT_IMAGE
+
 if [ "$INPUT_DIR" != "$OUTPUT_DIR" ]
 then
   # Copy source image to output dir, if they are no the same
