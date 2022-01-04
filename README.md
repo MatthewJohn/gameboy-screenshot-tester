@@ -50,3 +50,10 @@ The following are configs that can be provided as environment arguments to `dock
 | `OUTPUT_IMAGE` | Filename of output screenshot | `output.jpg` |
 | `COMPARISON_IMAGE` | Filename of comparison image that is generated | `comparison.jpg` |
 
+
+# License
+
+This project is licensed under Apache License 2.0.
+
+Please see `LICENSE` file for full license
+
