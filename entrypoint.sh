@@ -53,11 +53,6 @@ then
     COMPARISON_IMAGE=comparison.jpg
 fi
 
-if [ "$THRESHOLD" == "" ]
-then
-    THRESHOLD=95
-fi
-
 # Remove output file if it exists
 rm -f $OUTPUT_DIR/$OUTPUT_IMAGE
 
