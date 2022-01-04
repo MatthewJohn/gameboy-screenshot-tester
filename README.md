@@ -7,7 +7,9 @@ Run a gameboy ROM in a docker container, running a bgb replay, capture screensho
 
 Download BGB from https://bgb.bircd.org/ and place bgb.exe into `tools/` directory
 
+```
 docker build . -t gameboy-automated-screenshot-tester
+```
 
 ## Generating replay file
 
