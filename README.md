@@ -25,7 +25,11 @@ wine64 bgb.exe ./gb.rom -demoplay replay.dem
 
 ## Running
 
+Run docker container, mounting the current directory into `/work`
+
+```
 docker run -v `pwd`:/work gameboy-automated-screenshot-tester
+```
 
 ## Configs
 
