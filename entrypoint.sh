@@ -3,9 +3,19 @@
 set -x
 set -e
 
-if [ "$MOUNT_DIR" == "" ]
+if [ "$INPUT_DIR" == "" ]
 then
-    MOUNT_DIR=/work
+    INPUT_DIR=/work
+fi
+
+if [ "$OUTPUT_DIR" == "" ]
+then
+    OUTPUT_DIR=/work
+fi
+
+if [ "$ROM_DIR" == "" ]
+then
+    ROM_DIR=/work
 fi
 
 if [ "$DELAY" == "" ]
@@ -58,14 +68,14 @@ sleep 10
 export DISPLAY=:99
 
 # Start scot to take screenhot
-scrot --delay=$DELAY $MOUNT_DIR/$OUTPUT_IMAGE &
+scrot --delay=$DELAY $OUTPUT_DIR/$OUTPUT_IMAGE &
 
 set +e
 # Start BGB with timeout
-timeout --signal=TERM ${BGB_TIMEOUT}s wine64 /tools/bgb.exe bgb -runfast -rom $MOUNT_DIR/$ROM_FILE -demoplay $MOUNT_DIR/$REPLAY_FILE -setting 'WaveOut=0'
+timeout --signal=TERM ${BGB_TIMEOUT}s wine64 /tools/bgb.exe bgb -runfast -rom $ROM_DIR/$ROM_FILE -demoplay $INPUT_DIR/$REPLAY_FILE -setting 'WaveOut=0'
 
 # Compare images
-compare -verbose -metric mae $MOUNT_DIR/$SOURCE_IMAGE $MOUNT_DIR/$OUTPUT_IMAGE -compose Src $MOUNT_DIR/$COMPARISON_IMAGE
+compare -verbose -metric mae $INPUT_DIR/$SOURCE_IMAGE $OUTPUT_DIR/$OUTPUT_IMAGE -compose Src $OUTPUT_DIR/$COMPARISON_IMAGE
 
 comparison_failed=$?
 
