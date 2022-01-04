@@ -58,6 +58,12 @@ then
     THRESHOLD=95
 fi
 
+if [ "$INPUT_DIR" != "$OUTPUT_DIR" ]
+then
+  # Copy source image to output dir, if they are no the same
+  cp $INPUT_DIR/$SOURCE_IMAGE $OUTPUT_DIR/
+fi
+
 # Start display
 Xvfb :99 -screen 0 600x400x16 +extension GLX +render -noreset &
 xvfb_pid=$!
