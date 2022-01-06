@@ -11,6 +11,6 @@ RUN dpkg --add-architecture i386 && apt-get update && apt-get install --assume-y
 # Install node
 RUN apt-get install --assume-yes curl imagemagick
 
-COPY tools/bgb.exe /tools/
-COPY entrypoint.sh /tools/
-ENTRYPOINT /tools/entrypoint.sh
+COPY . /app/
+
+ENTRYPOINT /app/entrypoint.sh
