@@ -49,6 +49,7 @@ The following are configs that can be provided as environment arguments to `dock
 | `ROM_FILE` | Name of ROM file to run | `gb.rom` |
 | `OUTPUT_IMAGE` | Filename of output screenshot | `output.jpg` |
 | `COMPARISON_IMAGE` | Filename of comparison image that is generated | `comparison.jpg` |
+| `GENERATE_SOURCE_IMAGE` | Whether to generate (and overwrite) source image. Set when creating new test. Set to `true` to enable | `false` |
 
 
 # License

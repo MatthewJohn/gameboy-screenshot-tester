@@ -62,6 +62,11 @@ then
   cp $INPUT_DIR/$SOURCE_IMAGE $OUTPUT_DIR/
 fi
 
+if [ "$GENERATE_SOURCE_IMAGE" != "" ]
+then
+  GENERATE_SOURCE_IMAGE=false
+fi
+
 # Start display
 Xvfb :99 -screen 0 600x400x16 +extension GLX +render -noreset &
 xvfb_pid=$!
@@ -77,6 +82,15 @@ scrot --delay=$DELAY $OUTPUT_DIR/$OUTPUT_IMAGE &
 set +e
 # Start BGB with timeout
 timeout --signal=TERM ${BGB_TIMEOUT}s wine64 /app/tools/bgb.exe bgb -runfast -rom $ROM_DIR/$ROM_FILE -demoplay $INPUT_DIR/$REPLAY_FILE -setting 'WaveOut=0'
+
+# Check if just wanting to generate source image
+if [ "$GENERATE_SOURCE_IMAGE" != "false" ]
+then
+  # Rename output to source
+  echo "Generated source image: $INPUT_DIR/$SOURCE_IMAGE"
+  mv $OUTPUT_DIR/$OUTPUT_IMAGE $INPUT_DIR/$SOURCE_IMAGE
+  exit 0
+fi
 
 # Compare images
 compare -verbose -metric mae $INPUT_DIR/$SOURCE_IMAGE $OUTPUT_DIR/$OUTPUT_IMAGE -compose Src $OUTPUT_DIR/$COMPARISON_IMAGE
