@@ -43,6 +43,11 @@ then
     COMPARISON_IMAGE=comparison.jpg
 fi
 
+if [ "$GENERATE_SOURCE_IMAGE" == "" ]
+then
+  GENERATE_SOURCE_IMAGE=false
+fi
+
 # Remove output file if it exists
 rm -f $OUTPUT_DIR/$OUTPUT_IMAGE
 
@@ -50,11 +55,6 @@ if [ "$INPUT_DIR" != "$OUTPUT_DIR" ]
 then
   # Copy source image to output dir, if they are no the same
   cp $INPUT_DIR/$SOURCE_IMAGE $OUTPUT_DIR/
-fi
-
-if [ "$GENERATE_SOURCE_IMAGE" != "" ]
-then
-  GENERATE_SOURCE_IMAGE=false
 fi
 
 # Start display
@@ -69,6 +69,8 @@ export DISPLAY=:99
 set +e
 # Start BGB
 wine64 /app/tools/bgb.exe -autoexit -runfast -rom $ROM_DIR/$ROM_FILE -demoplay $INPUT_DIR/$REPLAY_FILE -setting 'WaveOut=0' -setting 'RecordMovie=1'
+
+mv $(ls -t -1 /app/tools/bgb*.bmp | head -1) $OUTPUT_DIR/$OUTPUT_IMAGE
 
 # Check if just wanting to generate source image
 if [ "$GENERATE_SOURCE_IMAGE" != "false" ]
