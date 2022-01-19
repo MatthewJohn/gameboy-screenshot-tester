@@ -18,24 +18,14 @@ then
     ROM_DIR=/work
 fi
 
-if [ "$DELAY" == "" ]
-then
-    DELAY=15
-fi
-
 if [ "$SOURCE_IMAGE" == "" ]
 then
-    SOURCE_IMAGE=source.jpg
+    SOURCE_IMAGE=source.bmp
 fi
 
 if [ "$REPLAY_FILE" == "" ]
 then
     REPLAY_FILE=replay.dem
-fi
-
-if [ "$BGB_TIMEOUT" == "" ]
-then
-    BGB_TIMEOUT=20
 fi
 
 if [ "$ROM_FILE" == "" ]
@@ -45,7 +35,7 @@ fi
 
 if [ "$OUTPUT_IMAGE" == "" ]
 then
-    OUTPUT_IMAGE=output.jpg
+    OUTPUT_IMAGE=output.bmp
 fi
 
 if [ "$COMPARISON_IMAGE" == "" ]
@@ -76,12 +66,9 @@ sleep 10
 
 export DISPLAY=:99
 
-# Start scot to take screenhot
-scrot --delay=$DELAY $OUTPUT_DIR/$OUTPUT_IMAGE &
-
 set +e
-# Start BGB with timeout
-timeout --signal=TERM ${BGB_TIMEOUT}s wine64 /app/tools/bgb.exe bgb -runfast -rom $ROM_DIR/$ROM_FILE -demoplay $INPUT_DIR/$REPLAY_FILE -setting 'WaveOut=0'
+# Start BGB
+wine64 /app/tools/bgb.exe -autoexit -runfast -rom $ROM_DIR/$ROM_FILE -demoplay $INPUT_DIR/$REPLAY_FILE -setting 'WaveOut=0' -setting 'RecordMovie=1'
 
 # Check if just wanting to generate source image
 if [ "$GENERATE_SOURCE_IMAGE" != "false" ]
