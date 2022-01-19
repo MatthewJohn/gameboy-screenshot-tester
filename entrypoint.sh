@@ -62,7 +62,7 @@ Xvfb :99 -screen 0 600x400x16 +extension GLX +render -noreset &
 xvfb_pid=$!
 
 # Wait for screen to start
-sleep 10
+sleep 3
 
 export DISPLAY=:99
 
