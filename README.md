@@ -49,6 +49,48 @@ The following are configs that can be provided as environment arguments to `dock
 | `COMPARISON_IMAGE` | Filename of comparison image that is generated | `comparison.jpg` |
 | `GENERATE_SOURCE_IMAGE` | Whether to generate (and overwrite) source image. Set when creating new test. Set to `true` to enable | `false` |
 
+## Example structure for running multiple tests
+
+### Directory structure
+
+```
+game.gb
+test_1/source.bmp
+test_2/source.bmp
+test_3/source.bmp
+...
+```
+
+Example script to run tests:
+```
+tests_failed=0
+
+for test_name in test_{1..3}
+do
+  mkdir $test_name
+
+  set +e
+  docker run --rm \
+    -e INPUT_DIR=/app/${test_name} \
+    -e OUTPUT_DIR=/output/${test_name} \
+    -e ROM_DIR=/output \
+    -e ROM_FILE=game.gb \
+    -v `pwd`:/output \
+    stickrpg-automated-test-tool:latest
+  if [ "$?" != "0" ]
+  then
+    tests_failed=1
+  fi
+  set -e
+done
+
+if [ "$tests_failed" != "0" ]
+then
+  echo One or more tests failed
+  exit 1
+fi
+
+```
 
 # License
 
