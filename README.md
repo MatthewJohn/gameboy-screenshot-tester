@@ -51,6 +51,10 @@ The following are configs that can be provided as environment arguments to `dock
 
 ## Example structure for running multiple tests
 
+In this example, I 'bake' the tests into the gameboy-automated-screenshot-tester docker image.
+
+The tests are then run in a container, which has the ROM in a volume and the screenshots are copied into this volume during the tests, so that they can be archived by the CI application.
+
 ### Directory structure
 
 ```
