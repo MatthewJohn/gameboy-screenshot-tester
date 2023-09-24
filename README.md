@@ -16,13 +16,13 @@ docker build . -t gameboy-automated-screenshot-tester
 Run BGB with rom and control game to generate replay:
 
 ```
-bgb.exe ./gb.rom -demoplay replay.dem
+bgb.exe ./gb.rom -demorec replay.dem
 ```
 
 This can also be run within wine:
 
 ```
-wine64 bgb.exe ./gb.rom -demoplay replay.dem
+wine64 bgb.exe ./gb.rom -demorec replay.dem
 ```
 
 ## Running
